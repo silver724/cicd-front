@@ -63,7 +63,7 @@ containerTemplate(name: 'kubectl', image: 'roffe/kubectl', command: 'cat', ttyEn
     stage('Dockerizing') {
       container('docker') {
         docker.withRegistry("${dockerRegistry}", "${credentialRegistry}") {
-          sh "docker build -f ./Dockerfile -t ${image}:${tag}"
+          sh "docker build -t ${image}:${tag}"
           sh "docker push ${image}:${tag}"
           sh "docker tag ${image}:${tag} ${image}:latest"
           sh "docker push ${image}:latest"
